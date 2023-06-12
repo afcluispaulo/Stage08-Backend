@@ -10,10 +10,10 @@ app.get("/message", (request, response) => {
 // Route Params
 
 app.get("/message/:id/:user", (request, response) => {
-
+    const { id, user } = request.params
     response.send(`
-    Mensagem ID: ${request.params.id}.
-    Para o usuário: ${request.params.user}
+    Mensagem ID: ${id}.
+    Para o usuário: ${user}
     `);
     
 });
