@@ -13,7 +13,7 @@ app.get("/message/:id/:user", (request, response) => {
     const { id, user } = request.params
     response.send(`
         Mensagem ID: ${id}.
-        Para o usuário: ${user}
+        Para o usuário: ${user}.
     `);
     
 });
@@ -26,4 +26,4 @@ app.get("/users", (request, response) => {
 })
 
 const PORT = 3333;
-app.listen(PORT, () => console.log(`Server is running on PORT ${PORT}. Link: https://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server is running on PORT ${PORT}. Link: localhost:${PORT}`));
