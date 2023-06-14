@@ -26,12 +26,21 @@ app.get("/users", (request, response) => {
     // localhost:3333/users?page=5&limit=10
 })
 
-app.post("/users", (request, response) => {
+/* app.post("/users", (request, response) => {
     const { name, email, password } = request.body;
     
     response.send(`Usuário: ${name}. E-mail: ${email}. Senha: ${password}`)
    
+}) */
+
+app.post("/users", (request, response) => {
+    const { name, email, password } = request.body;
+    
+    response.json({ name, email, password })
+   
 })
+
+
 
 
 const PORT = 3333;
