@@ -1,4 +1,5 @@
 class UserController {
+
     /**
      * index - GET para listar vários registros.
      * show - GET para exibir um registro específico.
@@ -15,5 +16,5 @@ class UserController {
 
 
 }
-
+ 
 module.exports = UserController;

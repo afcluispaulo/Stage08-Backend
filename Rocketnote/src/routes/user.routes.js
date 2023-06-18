@@ -6,6 +6,18 @@ const usersRoutes = Router();
 
 const usersController = new UserController;
 
-usersRoutes.post("/", usersController.create);
+function myMiddlware(request, response, next) {
+    console.log("Você passou pelo Middlware!")
+    
+}
+
+
+
+
+
+
+
+
+usersRoutes.post("/", myMiddlware, usersController.create);
 
 module.exports = usersRoutes;
