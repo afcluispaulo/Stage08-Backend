@@ -19,6 +19,6 @@ function myMiddlware(request, response, next) {
      
 }
 
-usersRoutes.post("/", myMiddlware, usersController.create);
+usersRoutes.post("/", usersController.create);
 
 module.exports = usersRoutes;
