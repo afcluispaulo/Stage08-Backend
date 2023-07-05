@@ -65,16 +65,19 @@ class UsersController {
                 throw new AppError("A senha antiga não confere.")
 
             }
+
+            user.password = await hash(password, 8);
         }
 
         await database.run(`
             UPDATE users SET
             name = ?,
             email = ?,
+            password = ?,
             updated_at = ?
             WHERE id = ?`,
 
-            [user.name, user.email, new Date(), id]
+            [user.name, user.email, user.password, new Date(), id]
         );
 
         return response.status(200).json();
