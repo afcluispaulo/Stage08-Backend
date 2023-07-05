@@ -1,8 +1,11 @@
 const { hash } = require("bcryptjs");
+
+const hashPassword = require("../utils/Crypto")
+
 const AppError = require("../utils/AppError");
 const sqliteConnection = require("../database/sqlite");
 
-class UserController {
+class UsersController {
 
     /**
      * index - GET para listar vários registros.
@@ -37,17 +40,17 @@ class UserController {
         const { name, email } = request.body;
         const { id } = request.params;
 
-        const database = await sqliteConnection()
+        const database = await sqliteConnection();
         const user = await database.get("SELECT * FROM users WHERE id = (?)", [id]);
 
         if (!user) {
             throw new AppError("Usuário não encontrado")
         }
 
-        const userWithUpdatedEmail = await database.get("SELECT * FROM users WHERE email = (?)", [email])
+        const userWithUpdatedEmail = await database.get("SELECT * FROM users WHERE email = (?)", [email]);
 
-        if(userWithUpdatedEmail && userWithUpdatedEmail !== id) {
-            throw new AppError("Este e-mail já está em uso!")
+        if(userWithUpdatedEmail && userWithUpdatedEmail.id !== user.id) {
+            throw new AppError("Este e-mail já está em uso!");
         }
 
         user.name = name;
@@ -57,15 +60,15 @@ class UserController {
             UPDATE users SET
             name = ?,
             email = ?,
-            updated_at = ?,
+            updated_at = ?
             WHERE id = ?`,
+
             [user.name, user.email, new Date(), id]
         );
 
-        return response.json();
+        return response.status(200).json();
 
     }
-
 }
  
-module.exports = UserController;
+module.exports = UsersController;

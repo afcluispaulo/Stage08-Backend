@@ -1,10 +1,10 @@
 const { Router } = require("express");
 
-const UserController = require("../controllers/UserController")
+const UsersController = require("../controllers/UsersController.js");
 
 const usersRoutes = Router();
 
-const usersController = new UserController;
+const usersController = new UsersController();
 
 function myMiddlware(request, response, next) {
     console.log("Você passou pelo Middlware!");
@@ -20,5 +20,6 @@ function myMiddlware(request, response, next) {
 }
 
 usersRoutes.post("/", usersController.create);
+usersRoutes.put("/:id", usersController.update);
 
 module.exports = usersRoutes;
