@@ -42,7 +42,7 @@ class UsersController {
         const user = await database.get("SELECT * FROM users WHERE id = (?)", [id]);
 
         if (!user) {
-            throw new AppError("Usuário não encontrado")
+            throw new AppError("Usuário não encontrado");
         }
 
         const userWithUpdatedEmail = await database.get("SELECT * FROM users WHERE email = (?)", [email]);
@@ -51,8 +51,8 @@ class UsersController {
             throw new AppError("Este e-mail já está em uso!");
         }
 
-        user.name = name;
-        user.email = email;
+        user.name = name ?? user.name;
+        user.email = email ?? user.email;
 
         if (password && !old_password) {
             throw new AppError("Você precisa informar a senha antiga para definir a nova senha!")
@@ -77,7 +77,7 @@ class UsersController {
             updated_at = DATETIME('now')
             WHERE id = ?`,
 
-            [user.name, user.email, user.password, new Date(), id]
+            [user.name, user.email, user.password,  id]
         );
 
         return response.status(200).json();
