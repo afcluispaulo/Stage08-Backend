@@ -7,7 +7,7 @@ module.exports = {
       filename: path.resolve(__dirname, "src", "database", "database.db")
     },
     usNullAsDefault: true
-  },
+  }
 
  
 };
