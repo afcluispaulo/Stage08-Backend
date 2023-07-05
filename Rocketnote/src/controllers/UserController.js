@@ -50,6 +50,20 @@ class UserController {
             throw new AppError("Este e-mail já está em uso!")
         }
 
+        user.name = name;
+        user.email = email;
+
+        await database.run(`
+            UPDATE users SET
+            name = ?,
+            email = ?,
+            updated_at = ?,
+            WHERE id = ?`,
+            [user.name, user.email, new Date(), id]
+        );
+
+        return response.json();
+
     }
 
 }
