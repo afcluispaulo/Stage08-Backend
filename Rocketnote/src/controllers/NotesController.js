@@ -16,10 +16,25 @@ class NotesController {
                 note_id, 
                 url: link
             }
-        })
+        });
 
-        await knex("links").insert(linksInsert)
+        await knex("links").insert(linksInsert);
+
+        const tagsInsert = links.map(name => {
+            return {
+                note_id, 
+                name,
+                user_id
+            }
+        });
+
+        await knex("links").insert(tagsInsert);
+
+        response.json();
     }
+
+
+    
 
 }
 
