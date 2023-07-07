@@ -2,12 +2,14 @@ const knex = require("../database/knex");
 
 class NotesController {
     async create(request, response) {
-        const { title, description, tags, links } = request.body;
+
+        // Nota: tem que ser igual ao que foi colocado no Migrations
+        const { title, descriptions, tags, links } = request.body;
         const { user_id } = request.params;
 
-        const note_id  = await knex("notes").insert({
+        const { note_id }  = await knex("notes").insert({
             title,
-            description,
+            descriptions,
             user_id
         })
 
@@ -20,7 +22,7 @@ class NotesController {
 
         await knex("links").insert(linksInsert);
 
-        const tagsInsert = links.map(name => {
+        const tagsInsert = tags.map(name => {
             return {
                 note_id, 
                 name,
@@ -28,7 +30,7 @@ class NotesController {
             }
         });
 
-        await knex("links").insert(tagsInsert);
+        await knex("tags").insert(tagsInsert);
 
         response.json();
     }
