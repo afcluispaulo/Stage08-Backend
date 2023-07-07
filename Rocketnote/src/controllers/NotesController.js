@@ -3,7 +3,7 @@ const knex = require("../database/knex");
 class NotesController {
     async create(request, response) {
 
-        // Nota: tem que ser igual ao que foi colocado no Migrations
+        // Nota: tem que ser igual ao que foi colocado notas
         const { title, descriptions, tags, links } = request.body;
         const { user_id } = request.params;
 
@@ -35,9 +35,14 @@ class NotesController {
         response.json();
     }
 
+    async show(request, response) {
+        const { id } = request.params;
 
-    
+        const note = await knex("notes").where({ id }).first();
 
+        return response.json(note);
+
+    }
 }
 
 module.exports = NotesController;
