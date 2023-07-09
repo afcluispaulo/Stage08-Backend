@@ -6,7 +6,6 @@ const knex = require("../database/knex");
  * "tags": ["node", "express"],
  * "links": ["link1", link2]
  */ 
-
  
 class NotesController {
     async create(request, response) {

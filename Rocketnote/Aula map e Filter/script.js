@@ -15,10 +15,9 @@ const newArray = tags.map(tag => {
 
 const newArray2 = tags.map(tag => {
     return tag;
-})
+});
 
 // e para adicionar coisas extras ao filtro?
-
 const newArray3 = tags.map(tag => {
     return {
         ...tag,
@@ -31,6 +30,6 @@ const newArrays2 = tags.filter(tag => tag.note_id === 2);
 
 // filtro serve como uma query no sql, só que para listas (Array)
 
-console.log(newArrays2)
+console.log(newArrays2);
 
-console.log("teste")
+console.log("teste");
