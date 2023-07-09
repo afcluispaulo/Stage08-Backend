@@ -3,7 +3,7 @@ const tags = [
     { id: 2, name: "express", note_id: 1 },
     { id: 3, name: "react", note_id: 1 },
     { id: 4, name: "javascipt", note_id: 1 },
-    { id: 5, name: "frontend", note_id: 1 },
+    { id: 5, name: "frontend", note_id: 2 },
 ];
 
 // const newArray = tags;
@@ -25,6 +25,12 @@ const newArray3 = tags.map(tag => {
         date: new Date()
     }
 })
-console.log(newArray3)
+
+const newArrays = tags.filter(tag => tag.note_id === 1);
+const newArrays2 = tags.filter(tag => tag.note_id === 2);
+
+// filtro serve como uma query no sql, só que para listas (Array)
+
+console.log(newArrays2)
 
 console.log("teste")
