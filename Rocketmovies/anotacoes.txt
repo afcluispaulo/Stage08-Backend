@@ -1,0 +1,5 @@
+para iniciar o Knex:
+    npx knex init
+
+
+
