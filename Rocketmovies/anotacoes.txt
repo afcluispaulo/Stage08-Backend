@@ -1,8 +1,10 @@
 para iniciar o Knex:
     npx knex init
 
-para iniciar a criação de uma tabela: 
+para iniciar a criação de uma migration: 
     npx knex migrate:make createNome_Tabela
 
+para conectar a migration com o banco de dados:
+    npx knex migrate:latest
 
-
+com o script agora fica npm run migrate
