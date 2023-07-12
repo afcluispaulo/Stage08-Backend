@@ -1,5 +1,8 @@
 para iniciar o Knex:
     npx knex init
 
+para iniciar a criação de uma tabela: 
+    npx knex migrate:make createNome_Tabela
+
 
 
