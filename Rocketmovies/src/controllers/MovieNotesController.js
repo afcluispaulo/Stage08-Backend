@@ -13,7 +13,7 @@ class MovieNotesController {
         const { title, descriptions, rating, tags } = request.body;
         const { user_id } = request.params;
 
-        const [ note_id ] = await knex("notes").insert({
+        const [ note_id ] = await knex("movie_notes").insert({
             title,
             descriptions,
             rating,
@@ -28,7 +28,7 @@ class MovieNotesController {
             }
         });
 
-        await knex("tags").insert(tagsInsert);
+        await knex("movie_tags").insert(tagsInsert);
 
        return response.json();
     }
@@ -36,8 +36,8 @@ class MovieNotesController {
     async show(request, response) {
         const { id } = request.params;
 
-        const notes = await knex("notes").where({ id }).first();
-        const tags = await knex("tags").where({ note_id: id }).orderBy("name");
+        const notes = await knex("movie_notes").where({ id }).first();
+        const tags = await knex("movie_tags").where({ note_id: id }).orderBy("name");
 
         return response.json({
             ...notes,
@@ -49,7 +49,7 @@ class MovieNotesController {
     async delete(request, response) { 
         const { id } = request.params;
 
-        await knex("notes").where({ id }).delete();
+        await knex("movie_notes").where({ id }).delete();
 
         return response.json();
 
@@ -64,7 +64,7 @@ class MovieNotesController {
             const filterTags = tags.split(',').map(tag => tag.trim());
             console.log(filterTags)
 
-            notes = await knex("tags")
+            notes = await knex("movie_tags")
             .select([
                 "notes.id",
                 "notes.title",
@@ -78,7 +78,7 @@ class MovieNotesController {
 
         }
 
-        const userTags = await knex("tags").where({ user_id })
+        const userTags = await knex("movie_tags").where({ user_id })
         const notesWithTags = await notes.map(note  => {
             const notesTags = userTags.filter(tag => tag.note_id === note.id)
 
