@@ -10,12 +10,13 @@ class MovieNotesController {
     async create(request, response) {
 
         // Nota: tem que ser igual ao que foi colocado em migrations
-        const { title, descriptions, tags } = request.body;
-        const { user_id }  = request.params;
+        const { title, descriptions, rating, tags } = request.body;
+        const { user_id } = request.params;
 
-        const [ note_id ]  = await knex("notes").insert({
+        const [ note_id ] = await knex("notes").insert({
             title,
             descriptions,
+            rating,
             user_id
         });
 
