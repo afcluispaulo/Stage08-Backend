@@ -76,7 +76,14 @@ class MovieNotesController {
             .innerJoin("notes", "notes.id", "tags.note_id")
             .orderBy("notes.title")
 
-        }
+        } else {
+            // somente a nota desse usuário
+                notes = await knex("movie_notes")
+                    .where({ user_id })
+                    .whereLike("title", `%${title}%`)
+                    .orderBy("title");
+            }
+
 
         const userTags = await knex("movie_tags").where({ user_id })
         const notesWithTags = await notes.map(note  => {
