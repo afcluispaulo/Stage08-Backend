@@ -12,7 +12,7 @@ class MovieNotesController {
         // Nota: tem que ser igual ao que foi colocado em migrations
         const { title, descriptions, rating, tags } = request.body;
         const { user_id } = request.params;
-
+ 
         const [ note_id ] = await knex("movie_notes").insert({
             title,
             descriptions,
